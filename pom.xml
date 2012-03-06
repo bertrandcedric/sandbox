@@ -9,6 +9,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<compileSource>1.6</compileSource>
 	</properties>
+	<modules>
+		<module>derby</module>
+		<module>mongodb</module>
+	</modules>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
