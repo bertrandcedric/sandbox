@@ -27,7 +27,9 @@ public class DerbyStoredProcedureTest {
 	@Before
 	public void setup() throws ClassNotFoundException {
 		Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-		jdbcTemplate = new JdbcTemplate(new SingleConnectionDataSource("jdbc:derby:memory:chapter02DB;create=true", false));
+		jdbcTemplate = new JdbcTemplate(new SingleConnectionDataSource(
+				"jdbc:derby:memory:chapter02DB;create=true",
+				false));
 	}
 
 	/**
@@ -64,7 +66,8 @@ public class DerbyStoredProcedureTest {
 	 */
 	@Test
 	public void jePeuxCreerUneProcedureStockee() {
-		jdbcTemplate.execute("CREATE PROCEDURE RETURN_ONE() " + "PARAMETER STYLE JAVA " + "LANGUAGE JAVA " + "DYNAMIC RESULT SETS 1 " + "EXTERNAL NAME 'com.valtech.derby.DerbyStoredProcedureTest.returnOne'");
+		jdbcTemplate.execute("CREATE PROCEDURE RETURN_ONE() " + "PARAMETER STYLE JAVA " + "LANGUAGE JAVA "
+				+ "DYNAMIC RESULT SETS 1 " + "EXTERNAL NAME 'com.valtech.DerbyStoredProcedureTest.returnOne'");
 
 		List<Integer> resultat = jdbcTemplate.query("CALL RETURN_ONE()", new RowMapper<Integer>() {
 			@Override
@@ -77,7 +80,8 @@ public class DerbyStoredProcedureTest {
 	}
 
 	/**
-	 * Implémentation de la procédure stockée RETURN_ONE_WITH_SPRING. Pour montrer qu'on peut utiliser jdbcTemplate à l'interieur d'une proc stoc. Pour varier les plaisir, on utilise un out param au lieu de renvoyer un resultset.
+	 * Implémentation de la procédure stockée RETURN_ONE_WITH_SPRING. Pour montrer qu'on peut utiliser jdbcTemplate à
+	 * l'interieur d'une proc stoc. Pour varier les plaisir, on utilise un out param au lieu de renvoyer un resultset.
 	 * 
 	 * @param result
 	 *            recevra la valeur du out param
@@ -96,11 +100,14 @@ public class DerbyStoredProcedureTest {
 	}
 
 	/**
-	 * On crée une procédure stockée sans paramétres, on l'exécute et on vérifie qu'on arrive à lire son resultset. Bien entendu, du point de vue de l'appelant, le fait que la proc stoc utilise spring est totalement invisible.
+	 * On crée une procédure stockée sans paramétres, on l'exécute et on vérifie qu'on arrive à lire son resultset. Bien
+	 * entendu, du point de vue de l'appelant, le fait que la proc stoc utilise spring est totalement invisible.
 	 */
 	@Test
 	public void uneProcedureStockeePeutUtiliserJdbcTemplate() {
-		jdbcTemplate.execute("CREATE PROCEDURE RETURN_ONE_WITH_SPRING(OUT CONSTANT_RESULT int) " + "PARAMETER STYLE JAVA " + "LANGUAGE JAVA " + "DYNAMIC RESULT SETS 0 " + "EXTERNAL NAME 'com.valtech.derby.DerbyStoredProcedureTest.returnOneWithSpring'");
+		jdbcTemplate.execute("CREATE PROCEDURE RETURN_ONE_WITH_SPRING(OUT CONSTANT_RESULT int) "
+				+ "PARAMETER STYLE JAVA " + "LANGUAGE JAVA " + "DYNAMIC RESULT SETS 0 "
+				+ "EXTERNAL NAME 'com.valtech.DerbyStoredProcedureTest.returnOneWithSpring'");
 
 		SimpleJdbcCall call = new SimpleJdbcCall(jdbcTemplate).withProcedureName("RETURN_ONE_WITH_SPRING");
 		Map<String, Object> out = call.execute(new HashMap<String, Void>());
