@@ -1,4 +1,4 @@
-package com.valtech;
+package fr.bertrand.cedric;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -14,7 +14,7 @@ import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 import com.mongodb.MongoException;
 
-public class MongoTest {
+public class MongoTest extends AbstractMongoTest {
 
 	@Test
 	public void test() throws UnknownHostException, MongoException {

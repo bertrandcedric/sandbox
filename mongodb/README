@@ -1,0 +1,5 @@
+ Install mongdb as a window service
+ 
+ mongod --remove
+ mongod --install --logpath="D:\Data\db\mongo.log" --dbpath="D:\Data\db"
+ 
