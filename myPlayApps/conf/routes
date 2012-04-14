@@ -3,6 +3,9 @@
 # ~~~~
 
 # Default path will just redirect to the computer list
+GET     /test                       controllers.Test.index()
+
+# Default path will just redirect to the computer list
 GET     /                           controllers.Application.index()
 
 # Computers list (look at the default values for pagination parameters)
@@ -21,4 +24,3 @@ POST    /computers/:id/delete       controllers.Application.delete(id:Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
-
