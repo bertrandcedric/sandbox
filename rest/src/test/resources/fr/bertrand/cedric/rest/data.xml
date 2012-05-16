@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<collection xmlns:ns2="http://www.clubmed.com/services/v1_0/">
+	<ns2:offre>
+		<ns2:codeVillage>1     </ns2:codeVillage>
+		<ns2:dateDepart>2010-03-01T00:00:00+01:00</ns2:dateDepart>
+		<ns2:nombreNuit>5</ns2:nombreNuit>
+		<ns2:codePaysCommercial>ZZZ</ns2:codePaysCommercial>
+		<ns2:offreNet>true</ns2:offreNet>
+		<ns2:codeDeviseCommercial>YYY</ns2:codeDeviseCommercial>
+		<ns2:nombrePersonneAdulte>1</ns2:nombrePersonneAdulte>
+		<ns2:dureeTotale>7</ns2:dureeTotale>
+		<ns2:codeLogementCommercial>ABCDEF</ns2:codeLogementCommercial>
+		<ns2:codeOccupation>1</ns2:codeOccupation>
+		<ns2:codeVilleDepartDemande>ABCDEF</ns2:codeVilleDepartDemande>
+		<ns2:codeVilleIataDepart>ABCDEF</ns2:codeVilleIataDepart>
+		<ns2:codeVilleIataArrivee>ABCDEF</ns2:codeVilleIataArrivee>
+		<ns2:categorieTarif>ABCDEF</ns2:categorieTarif>
+		<ns2:codeInfoDispoOccupation>1</ns2:codeInfoDispoOccupation>
+		<ns2:typeElargissement>ABCDEFGHIJ</ns2:typeElargissement>
+		<ns2:transportRisqueFinancier>true</ns2:transportRisqueFinancier>
+		<ns2:prixVenteGds>123</ns2:prixVenteGds>
+		<ns2:codeTerminalAeroport>ABCDEF</ns2:codeTerminalAeroport>
+		<ns2:montant>124</ns2:montant>
+		<ns2:montantPromotion>125</ns2:montantPromotion>
+		<ns2:codePromotion>ABCDEF</ns2:codePromotion>
+	</ns2:offre>
+</collection>

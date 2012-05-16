@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+<Configure id="Server" class="org.mortbay.jetty.plugin.JettyServer">
+	<New id="dataSource" class="org.eclipse.jetty.plus.jndi.EnvEntry">
+		<Arg>jdbc/dataSource</Arg>
+		<Arg>
+			<New class="org.apache.commons.dbcp.BasicDataSource">
+				<Set name="driverClassName">org.apache.derby.jdbc.EmbeddedDriver</Set>
+				<Set name="url">jdbc:derby:memory:b2c;create=true</Set>
+				<Set name="initialSize">5</Set>
+				<Set name="maxActive">5</Set>
+			</New>
+		</Arg>
+		<Arg type="boolean">true</Arg>
+	</New>
+</Configure>
