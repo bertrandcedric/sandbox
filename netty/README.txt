@@ -1,0 +1,1 @@
+mvn gatling:execute -Dgatling.simulations=SimulationNetty -Pgatling

@@ -15,6 +15,7 @@
 		<module>divers</module>
 		<module>mongodb</module>
 		<module>rest</module>
+		<module>netty</module>
 	</modules>
 	<dependencies>
 		<dependency>
