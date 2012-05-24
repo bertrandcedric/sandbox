@@ -4,6 +4,7 @@ import static org.fest.assertions.Assertions.assertThat;
 
 import java.net.UnknownHostException;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.mongodb.BasicDBObject;
@@ -17,7 +18,8 @@ import com.mongodb.MongoException;
 public class MongoTest extends AbstractMongoTest {
 
 	@Test
-	public void test() throws UnknownHostException, MongoException {
+	@Ignore
+	public void insert() throws UnknownHostException, MongoException {
 		// connect to mongoDB, ip and port number
 		Mongo mongo = new Mongo("localhost", 27017);
 

@@ -13,11 +13,11 @@ import org.scribe.oauth.OAuthService;
 
 public class Example {
 
-	private static final String PROTECTED_RESOURCE_URL = "https://api.twitter.com/1/users/show.json?screen_name=bertrandcedric&include_entities=true";
+	// private static final String PROTECTED_RESOURCE_URL = "https://api.twitter.com/1/users/show.json?screen_name=bertrandcedric&include_entities=true";
+	private static final String PROTECTED_RESOURCE_URL = "http://api.twitter.com/oauth/request_token";
 
 	public static void main(String[] args) {
-		OAuthService service = new ServiceBuilder().provider(TwitterApi.class).apiKey("6icbcAXyZx67r8uTAUM5Qw")
-				.apiSecret("SCCAdUUc6LXxiazxH3N0QfpNUvlUy84mZ2XZKiv39s").build();
+		OAuthService service = new ServiceBuilder().provider(TwitterApi.class).apiKey("6icbcAXyZx67r8uTAUM5Qw").apiSecret("SCCAdUUc6LXxiazxH3N0QfpNUvlUy84mZ2XZKiv39s").build();
 		Scanner in = new Scanner(System.in);
 
 		System.out.println("=== Twitter's OAuth Workflow ===");

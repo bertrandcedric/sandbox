@@ -12,8 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.fest.util.Files;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.mongodb.BasicDBObject;
@@ -24,7 +23,7 @@ import com.mongodb.MongoURI;
 
 public abstract class AbstractMongoTest {
 
-	@BeforeClass
+	// @BeforeClass
 	public static void start_database_as_a_forked_process() throws IOException, InterruptedException {
 		File dbPath = ensureDbPathDoesNotExits();
 		assertThat(dbPath.mkdir()).isTrue();
@@ -74,6 +73,7 @@ public abstract class AbstractMongoTest {
 	}
 
 	@Test
+	@Ignore
 	public void should_connect_to_the_test_database() throws Exception {
 		Mongo mongo = new Mongo();
 		try {
@@ -84,7 +84,7 @@ public abstract class AbstractMongoTest {
 		}
 	}
 
-	@AfterClass
+	// @AfterClass
 	public static void shutdown_mongodb() throws IOException {
 		Mongo mongo = new Mongo();
 		try {

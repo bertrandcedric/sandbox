@@ -1,28 +1,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>fr.bertrand.cedric</groupId>
+	<parent>
+		<groupId>fr.bertrand.cedric</groupId>
+		<artifactId>sandbox</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
 	<artifactId>rest</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>
 		<create.data>false</create.data>
 		<insert.data>false</insert.data>
-		<maven.compiler.source>1.6</maven.compiler.source>
-		<maven.compiler.target>1.6</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>3.1.1.RELEASE</spring.version>
 		<resteasy.version>2.3.1.GA</resteasy.version>
 		<jetty.version>8.1.3.v20120416</jetty.version>
 		<derby.version>10.8.2.2</derby.version>
 		<commons-dbcp.version>1.4</commons-dbcp.version>
-		<slf4j.version>1.6.4</slf4j.version>
-		<logback.version>1.0.0</logback.version>
-		<junit.version>4.10</junit.version>
-		<xmlunit.version>1.3</xmlunit.version>
-		<hsqldb.version>2.2.8</hsqldb.version>
-		<fest-assert.version>1.4</fest-assert.version>
 		<gatling.version>1.1.6</gatling.version>
 		<commons-io.version>1.3.2</commons-io.version>
 		<mysql.version>5.1.20</mysql.version>
@@ -76,59 +71,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
-		<!-- log -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>${logback.version}</version>
-		</dependency>
-
-		<!-- test -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${spring.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>xmlunit</groupId>
-			<artifactId>xmlunit</artifactId>
-			<version>${xmlunit.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<version>${hsqldb.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.easytesting</groupId>
-			<artifactId>fest-assert</artifactId>
-			<version>${fest-assert.version}</version>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
-	<build>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
-	</build>
 	<profiles>
 		<profile>
 			<id>create</id>
