@@ -16,11 +16,10 @@ import org.jboss.netty.handler.codec.http.HttpRequest;
 import org.jboss.netty.handler.codec.http.HttpResponse;
 import org.jboss.netty.util.CharsetUtil;
 
-import com.google.gson.Gson;
 import com.google.inject.Injector;
 import com.google.inject.Key;
 
-import fr.bertrand.cedric.controller.Controller;
+import fr.bertrand.cedric.controller.IController;
 
 public class HttpServerHandler extends SimpleChannelUpstreamHandler {
 
@@ -30,8 +29,8 @@ public class HttpServerHandler extends SimpleChannelUpstreamHandler {
 		this.injector = injector;
 	}
 
-	private Controller controller(String action) {
-		return injector.getInstance(Key.get(Controller.class, named(action)));
+	private IController controller(String action) {
+		return injector.getInstance(Key.get(IController.class, named(action)));
 	}
 
 	@Override
@@ -40,11 +39,13 @@ public class HttpServerHandler extends SimpleChannelUpstreamHandler {
 		writeResponse(e, controller(request.getUri()).render());
 	}
 
-	private void writeResponse(MessageEvent e, Object content) {
+	private void writeResponse(MessageEvent e, String content) {
+		HttpRequest request = (HttpRequest) e.getMessage();
+
 		// Build the response object.
 		HttpResponse response = new DefaultHttpResponse(HTTP_1_1, OK);
-		response.setContent(ChannelBuffers.copiedBuffer(new Gson().toJson(content), CharsetUtil.UTF_8));
-		response.setHeader(CONTENT_TYPE, "application/json; charset=UTF-8");
+		response.setContent(ChannelBuffers.copiedBuffer(content, CharsetUtil.UTF_8));
+		response.setHeader(CONTENT_TYPE, controller(request.getUri()).getContentType());
 
 		// Write the response.
 		ChannelFuture future = e.getChannel().write(response);
