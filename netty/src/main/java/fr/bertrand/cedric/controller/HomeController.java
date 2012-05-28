@@ -13,6 +13,7 @@ public class HomeController implements IController {
 		try {
 			String html = FileUtils.readFileToString(new File("index.html"));
 			ST template = new ST(html, '$', '$');
+
 			template.add("data", "essai");
 
 			return template.render();
