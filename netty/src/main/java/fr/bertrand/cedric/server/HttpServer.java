@@ -19,12 +19,14 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Key;
 
-import fr.bertrand.cedric.controller.FavIconController;
 import fr.bertrand.cedric.controller.IController;
 import fr.bertrand.cedric.controller.IndexController;
 import fr.bertrand.cedric.controller.ListController;
+import fr.bertrand.cedric.controller.ResourceController;
 
 public class HttpServer extends AbstractExecutionThreadService {
+
+	public static final String RESOURCES = "/resources";
 
 	private final Injector injector;
 	private final int port;
@@ -38,9 +40,10 @@ public class HttpServer extends AbstractExecutionThreadService {
 		this.injector = Guice.createInjector(new AbstractModule() {
 			@Override
 			protected void configure() {
-				bind(Key.get(IController.class, named("/favicon.ico"))).to(FavIconController.class);
-				bind(Key.get(IController.class, named("/list"))).to(ListController.class);
+				bind(Key.get(IController.class, named("/favicon.ico"))).to(ResourceController.class);
+				bind(Key.get(IController.class, named(RESOURCES))).to(ResourceController.class);
 				bind(Key.get(IController.class, named("/"))).to(IndexController.class);
+				bind(Key.get(IController.class, named("/list"))).to(ListController.class);
 			}
 		});
 	}

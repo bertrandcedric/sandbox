@@ -1,6 +1,7 @@
 package fr.bertrand.cedric.server;
 
 import static com.google.inject.name.Names.named;
+import static fr.bertrand.cedric.server.HttpServer.RESOURCES;
 import static org.jboss.netty.handler.codec.http.HttpHeaders.Names.CONTENT_TYPE;
 import static org.jboss.netty.handler.codec.http.HttpResponseStatus.OK;
 import static org.jboss.netty.handler.codec.http.HttpVersion.HTTP_1_1;
@@ -31,6 +32,9 @@ public class HttpServerHandler extends SimpleChannelUpstreamHandler {
 
 	private IController controller(String action) throws Exception {
 		try {
+			if (action.startsWith(RESOURCES)) {
+				return injector.getInstance(Key.get(IController.class, named(RESOURCES)));
+			}
 			return injector.getInstance(Key.get(IController.class, named(action)));
 		} catch (Exception e) {
 			return new ErrorController("Unable to find controller for action '" + action + "'.");
@@ -40,7 +44,9 @@ public class HttpServerHandler extends SimpleChannelUpstreamHandler {
 	@Override
 	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) throws Exception {
 		HttpRequest request = (HttpRequest) e.getMessage();
-		writeResponse(e, controller(request.getUri()).render(), controller(request.getUri()).getContentType());
+		String uri = request.getUri();
+		IController controller = controller(uri);
+		writeResponse(e, controller.render(uri), controller.getContentType());
 	}
 
 	private void writeResponse(MessageEvent e, byte[] content, String contentType) {

@@ -2,26 +2,30 @@ package fr.bertrand.cedric;
 
 import net.sourceforge.jwebunit.junit.WebTester;
 
-import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 
 import fr.bertrand.cedric.server.HttpServer;
 
 public class WebTesterHelper extends WebTester {
 
 	private static final int DEFAULT_PORT = 8183;
-	private HttpServer server;
+	private static HttpServer server;
 
-	@Before
-	public void startService() {
+	@BeforeClass
+	public static void startService() {
 		server = new HttpServer(DEFAULT_PORT);
 		server.startAndWait();
+	}
 
+	@Before
+	public void before() {
 		setBaseUrl("http://localhost:" + DEFAULT_PORT);
 	}
 
-	@After
-	public void stopService() {
+	@AfterClass
+	public static void stopService() {
 		if (null != server) {
 			server.getChannel().close();
 		}

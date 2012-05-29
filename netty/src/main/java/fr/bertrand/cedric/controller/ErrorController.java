@@ -1,9 +1,9 @@
 package fr.bertrand.cedric.controller;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.StringWriter;
 
-import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.stringtemplate.v4.ST;
@@ -21,10 +21,11 @@ public class ErrorController implements IController {
 	}
 
 	@Override
-	public byte[] render() {
+	public byte[] render(String... file) {
 		try {
-			String html = FileUtils.readFileToString(new File("error.html"));
-			ST template = new ST(html, '$', '$');
+			StringWriter writer = new StringWriter();
+			IOUtils.copy(getClass().getResourceAsStream("/html/error.html"), writer);
+			ST template = new ST(writer.getBuffer().toString(), '$', '$');
 
 			template.add("error", msg);
 
