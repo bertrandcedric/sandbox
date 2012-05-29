@@ -7,7 +7,7 @@ import fr.bertrand.cedric.WebTesterHelper;
 public class IndexControllerTest extends WebTesterHelper {
 
 	@Test
-	public void showHome() {
+	public void index() {
 		beginAt("/");
 
 		assertTextPresent("Test");
