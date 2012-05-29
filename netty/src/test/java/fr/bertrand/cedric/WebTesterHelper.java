@@ -23,7 +23,7 @@ public class WebTesterHelper extends WebTester {
 	@After
 	public void stopService() {
 		if (null != server) {
-			server.stopAndWait();
+			server.getChannel().close();
 		}
 	}
 

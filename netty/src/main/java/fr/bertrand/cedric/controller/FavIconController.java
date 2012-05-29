@@ -4,19 +4,13 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
-import org.stringtemplate.v4.ST;
 
-public class HomeController implements IController {
+public class FavIconController<T> implements IController {
 
 	@Override
-	public String render() {
+	public byte[] render() {
 		try {
-			String html = FileUtils.readFileToString(new File("index.html"));
-			ST template = new ST(html, '$', '$');
-
-			template.add("data", "essai");
-
-			return template.render();
+			return FileUtils.readFileToByteArray(new File("favicon.png"));
 		} catch (IOException e) {
 			return null;
 		}

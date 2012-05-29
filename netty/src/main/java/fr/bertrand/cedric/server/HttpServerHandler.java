@@ -14,11 +14,11 @@ import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
 import org.jboss.netty.handler.codec.http.DefaultHttpResponse;
 import org.jboss.netty.handler.codec.http.HttpRequest;
 import org.jboss.netty.handler.codec.http.HttpResponse;
-import org.jboss.netty.util.CharsetUtil;
 
 import com.google.inject.Injector;
 import com.google.inject.Key;
 
+import fr.bertrand.cedric.controller.ErrorController;
 import fr.bertrand.cedric.controller.IController;
 
 public class HttpServerHandler extends SimpleChannelUpstreamHandler {
@@ -29,23 +29,25 @@ public class HttpServerHandler extends SimpleChannelUpstreamHandler {
 		this.injector = injector;
 	}
 
-	private IController controller(String action) {
-		return injector.getInstance(Key.get(IController.class, named(action)));
+	private IController controller(String action) throws Exception {
+		try {
+			return injector.getInstance(Key.get(IController.class, named(action)));
+		} catch (Exception e) {
+			return new ErrorController("Unable to find controller for action '" + action + "'.");
+		}
 	}
 
 	@Override
 	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) throws Exception {
 		HttpRequest request = (HttpRequest) e.getMessage();
-		writeResponse(e, controller(request.getUri()).render());
+		writeResponse(e, controller(request.getUri()).render(), controller(request.getUri()).getContentType());
 	}
 
-	private void writeResponse(MessageEvent e, String content) {
-		HttpRequest request = (HttpRequest) e.getMessage();
-
+	private void writeResponse(MessageEvent e, byte[] content, String contentType) {
 		// Build the response object.
 		HttpResponse response = new DefaultHttpResponse(HTTP_1_1, OK);
-		response.setContent(ChannelBuffers.copiedBuffer(content, CharsetUtil.UTF_8));
-		response.setHeader(CONTENT_TYPE, controller(request.getUri()).getContentType());
+		response.setContent(ChannelBuffers.copiedBuffer(content));
+		response.setHeader(CONTENT_TYPE, contentType);
 
 		// Write the response.
 		ChannelFuture future = e.getChannel().write(response);
