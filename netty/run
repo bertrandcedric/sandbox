@@ -1,2 +1,0 @@
-mvn clean package -DskipTests
-java -jar target/myNettyApp.jar 8081
