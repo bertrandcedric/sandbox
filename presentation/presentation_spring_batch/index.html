@@ -352,7 +352,7 @@
 						<h2 class="center">Configuration du job</h2>
 					</hgroup>
 					<div>
-						<pre><code><br>&lt;job id="statification"&gt;<br>	...<br>	&lt;step id="filtreCritereElaboration"&gt;<br>		&lt;tasklet transaction-manager="txManager" &gt;<br>			&lt;chunk reader="criteresReader" processor="compositeProcessor" <br>				writer="DOFWriter" commit-interval="${pageSize}" /&gt;<br>			&lt;listeners&gt;<br>				&lt;listener ref="chunkLoggerListener" /&gt;<br>				&lt;listener ref="itemLoggerListener" /&gt;<br>			&lt;/listeners&gt;<br>		&lt;/tasklet&gt;<br>		&lt;listeners&gt;<br>			&lt;listener ref="stepLoggerListener" /&gt;<br>			&lt;listener ref="stepDOFListener" /&gt;<br>		&lt;/listeners&gt;<br>	&lt;/step&gt;<br>	...<br>&lt;/job&gt;</code></pre>
+						<pre><code><br>&lt;job id="statification"&gt;<br>	...<br>	&lt;step id="filtreCritereElaboration"&gt;<br>		&lt;tasklet transaction-manager="txManager" &gt;<br>			&lt;chunk reader="criteresReader" processor="compositeProcessor" <br>				writer="DOFWriter" commit-interval="100" /&gt;<br>			&lt;listeners&gt;<br>				&lt;listener ref="chunkLoggerListener" /&gt;<br>				&lt;listener ref="itemLoggerListener" /&gt;<br>			&lt;/listeners&gt;<br>		&lt;/tasklet&gt;<br>		&lt;listeners&gt;<br>			&lt;listener ref="stepLoggerListener" /&gt;<br>			&lt;listener ref="stepDOFListener" /&gt;<br>		&lt;/listeners&gt;<br>	&lt;/step&gt;<br>	...<br>&lt;/job&gt;</code></pre>
 					</div>
 				</section>
 			</div>
@@ -375,7 +375,7 @@
 					</hgroup>
 					<br>
 					<div>
-						<pre><code><br>&lt;bean id="criteresReader" class="org.springframework.batch.item.database.JdbcPagingItemReader"&gt;<br>	&lt;property name="dataSource" ref="dataSource" /&gt;<br>	&lt;property name="queryProvider"&gt;<br>		&lt;bean class="org...SqlPagingQueryProviderFactoryBean"&gt;<br>			&lt;property name="dataSource" ref="dataSource" /&gt;<br>			&lt;property name="selectClause" value="select *" /&gt;<br>			&lt;property name="fromClause" value="FROM ST.CRITETB" /&gt;<br>			&lt;property name="sortKey" value="ID" /&gt;<br>		&lt;/bean&gt;<br>	&lt;/property&gt;<br>	&lt;property name="pageSize" value="${pageSize}" /&gt;<br>	&lt;property name="rowMapper"&gt;<br>		&lt;ref local="critereElaborationRowMapper"/&gt;<br>	&lt;/property&gt;<br>&lt;/bean&gt;
+						<pre><code><br>&lt;bean id="criteresReader" class="org.springframework.batch.item.database.JdbcPagingItemReader"&gt;<br>	&lt;property name="dataSource" ref="dataSource" /&gt;<br>	&lt;property name="queryProvider"&gt;<br>		&lt;bean class="org...SqlPagingQueryProviderFactoryBean"&gt;<br>			&lt;property name="dataSource" ref="dataSource" /&gt;<br>			&lt;property name="selectClause" value="select *" /&gt;<br>			&lt;property name="fromClause" value="FROM ST.CRITETB" /&gt;<br>			&lt;property name="sortKey" value="ID" /&gt;<br>		&lt;/bean&gt;<br>	&lt;/property&gt;<br>	&lt;property name="pageSize" value="100" /&gt;<br>	&lt;property name="rowMapper"&gt;<br>		&lt;ref local="critereElaborationRowMapper"/&gt;<br>	&lt;/property&gt;<br>&lt;/bean&gt;
 						</code></pre>
 					</div>
 				</section>
