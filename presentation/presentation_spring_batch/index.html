@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Présentation Spring Batch</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/perso.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/sunburst.css" type="text/css" media="all" />
+</head>
+<body>
+	<nav id="helpers">
+		<button title="Previous" id="nav-prev" class="nav-prev">&lt;-</button>
+		<button title="Jump to slide" id="slide-no">1</button>
+		<button title="Next" id="nav-next" class="nav-next">-&gt;</button>
+		<menu>
+			<button type="checkbox" data-command="notes" title="View Notes">Notes</button>
+			<button type="checkbox" data-command="help" title="View Help">Help</button>
+		</menu>
+	</nav>
+	<div class="presentation">
+		<div id="presentation-counter">Loading...</div>
+		<div class="slides">
+			<div class="slide" id="home">
+				<section>
+					<hgroup>
+						<h2 class="center">Présentation Spring Batch</h2>
+					</hgroup>
+				</section>
+				<aside class="note">
+					<section>
+						<p>Press <span id="left-init-key" class="key">&rarr;</span> key to continue.</p>
+					</section>
+				</aside>
+			</div>
+			<div class="slide" id="slide1">
+				<section>
+					<hgroup>
+						<h2 class="center">Pourquoi un framework de batch?</h2>
+					</hgroup>
+					<ul>
+						<li>Framework pour le web</li>
+						<li>Framework de persistence</li>
+						<li>En finir avec : <pre><code>public static void main(String args){}</code></pre></li>
+						<li>Fournir une solution open source pour le développement d'un batch</li>
+					</ul>
+				</section>
+			</div>
+			<div class="slide" id="slide2">
+				<section>
+					<hgroup>
+						<h2 class="center">Pourquoi passer à Spring Batch?</h2>
+					</hgroup>
+					<p>Un Batch est une répétition en très grand nombre d’opérations unitaires</p>
+					<ul>
+						<li>Utilisation de Spring</li>
+						<li>Traitement par lot</li>
+						<li>Gestion des transactions</li>
+						<li>Mécanisme de reprise sur erreur</li>
+						<li>Facilite la maintenance du code</li>
+						<li>Facilite la testabilité du code</li>
+					</ul>
+				</section>
+			</div>
+			<div class="slide" id="slide3">
+				<section>
+					<hgroup>
+						<h2 class="center">Pourquoi ne pas utiliser Spring Batch?</h2>
+					</hgroup>
+					<ul>
+						<li>Spring Batch n'est pas un scheduler</li>
+					</ul>
+				</section>
+			</div>
+			<div class="slide" id="slide4">
+				<section>
+					<hgroup>
+						<h2 class="center">Concepts</h2>
+					</hgroup>
+					<div class="center">
+						<img src="img/spring-batch-reference-model.png">
+					</div>
+				</section>
+			</div>
+			<div class="slide" id="slide5">
+				<section>
+					<hgroup>
+						<h2 class="center">Job / Job instance / Job execution</h2>
+					</hgroup>
+					<div class="center">
+						<img src="img/job-stereotypes-parameters.png">
+					</div>
+				</section>
+			</div>
+			<div class="slide" id="slide6">
+				<section>
+					<hgroup>
+						<h2 class="center">Job / Job instance / Job execution</h2>
+					</hgroup>
+					<div style="float: left">
+						<p>BATCH_JOB_INSTANCE</p>
+						<table summary="BATCH_JOB_INSTANCE" border="1">
+							<tbody>
+								<tr>
+									<td>JOB_INST_ID</td>
+									<td>JOB_NAME</td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>EndOfDayJob</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div style="float: right">
+						<p>BATCH_JOB_INSTANCE</p>
+						<table summary="BATCH_JOB_PARAMS" border="1">
+							<tbody>
+								<tr>
+									<td>JOB_INST_ID</td>
+									<td>TYPE_CD</td>
+									<td>KEY_NAME</td>
+									<td>DATE_VAL</td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>DATE</td>
+									<td>schedule.Date</td>
+									<td>2012-01-01</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div style="clear:both;"></div>
+					<br>
+					<div>
+						<p>BATCH_JOB_INSTANCE</p>
+						<table summary="BATCH_JOB_EXECUTION" border="1">
+							<tbody>
+								<tr>
+									<td>JOB_EXEC_ID</td>
+									<td>JOB_INST_ID</td>
+									<td>START_TIME</td>
+									<td>END_TIME</td>
+									<td>STATUS</td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>1</td>
+									<td>2012-01-01 21:00</td>
+									<td>2012-01-01 21:30</td>
+									<td>FAILED</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</section>
+			</div>
+			<div class="slide" id="slide7">
+				<section>
+					<hgroup>
+						<h2 class="center">Job / Job instance / Job execution</h2>
+					</hgroup>
+					<div style="float: left">
+						<p>BATCH_JOB_INSTANCE</p>
+						<table summary="BATCH_JOB_INSTANCE" border="1">
+							<tbody>
+								<tr>
+									<td>JOB_INST_ID</td>
+									<td>JOB_NAME</td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>EndOfDayJob</td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td>EndOfDayJob</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div style="float: right">
+						<p>BATCH_JOB_INSTANCE</p>
+						<table summary="BATCH_JOB_PARAMS" border="1">
+							<tbody>
+								<tr>
+									<td>JOB_INST_ID</td>
+									<td>TYPE_CD</td>
+									<td>KEY_NAME</td>
+									<td>DATE_VAL</td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>DATE</td>
+									<td>schedule.Date</td>
+									<td>2012-01-01</td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td>DATE</td>
+									<td>schedule.Date</td>
+									<td>2012-02-01</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div style="clear:both;"></div>
+					<br>
+					<div>
+						<p>BATCH_JOB_INSTANCE</p>
+						<table summary="BATCH_JOB_EXECUTION">
+							<tbody>
+								<tr>
+									<td>JOB_EXEC_ID</td>
+									<td>JOB_INST_ID</td>
+									<td>START_TIME</td>
+									<td>END_TIME</td>
+									<td>STATUS</td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>1</td>
+									<td>2012-01-01 21:00</td>
+									<td>2012-01-01 21:30</td>
+									<td>FAILED</td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td>1</td>
+									<td>2012-02-01 21:00</td>
+									<td>2012-02-01 21:30</td>
+									<td>COMPLETED</td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>1</td>
+									<td>2012-02-01 21:31</td>
+									<td>2012-02-01 22:29</td>
+									<td>COMPLETED</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</section>
+			</div>
+			<div class="slide" id="slide8">
+				<section>
+					<hgroup>
+						<h2 class="center">Job repository</h2>
+					</hgroup>
+					<br>
+					<div class="center">
+						<img src="img/job-repository.png">
+					</div>
+				</section>
+			</div>
+			<div class="slide" id="slide9">
+				<section>
+					<hgroup>
+						<h2 class="center">Exemple de job launcher : SimpleJobLauncher</h2>
+					</hgroup>
+					<br>
+					<div class="center">
+						<img src="img/job-launcher-sequence-sync.png">
+					</div>
+				</section>
+			</div>
+			<div class="slide" id="slide10">
+				<section>
+					<hgroup>
+						<h2 class="center">Configuration du jobLauncher</h2>
+					</hgroup>
+					<br>
+					<div>
+						<pre><code><br>&lt;bean id="transactionManager" class="org...ResourcelessTransactionManager" /&gt;<br>&lt;bean id="jobRepository" class="org....MapJobRepositoryFactoryBean" &gt;<br>	&lt;property name="transactionManager" ref="transactionManager" /&gt;<br>&lt;/bean&gt;<br>&lt;bean id="jobLauncher" class="org...SimpleJobLauncher" &gt;<br>	&lt;property name="jobRepository" ref="jobRepository" /&gt;<br>&lt;/bean&gt;
+						</code></pre>
+					</div>
+				</section>
+			</div>
+			<div class="slide" id="slide11">
+				<section>
+					<hgroup>
+						<h2 class="center">Execution d'un job</h2>
+					</hgroup>
+					<br>
+					<div class="center">
+						<pre><code>mvn exec:java -Dexec.mainClass=CommandLineJobRunner<br>-Dexec.args="batch.xml statification"</code></pre>
+						<br>
+						<pre><code>java CommandLineJobRunner batch.xml statification</code></pre>
+					</div>
+				</section>
+			</div>
+			<div class="slide" id="slide12">
+				<section>
+					<hgroup>
+						<h2 class="center">Le job</h2>
+					</hgroup>
+					<br>
+					<div style="float: left; margin-left: 100px;" class="center">
+						<img src="img/sequential-flow.png">
+					</div>
+					<div style="float: right; margin-right: 50px;" class="center">
+						<img src="img/conditional-flow.png">
+					</div>
+					<div style="clear:both;"></div>
+					<ul>
+						<li>Un enchaînement d'étape plus ou moins complexe</li>
+					</ul>
+				</section>
+			</div>
+			<div class="slide" id="slide13">
+				<section>
+					<hgroup>
+						<h2 class="center">Le step</h2>
+					</hgroup>
+					<br>
+					<div class="center">
+						<img src="img/step.png">
+					</div>
+					<ul>
+						<li>Un processus 'Chunk-Oriented' par défaut</li>
+						<li>C'est là que l'on retrouve les traitements métier</li>
+					</ul>
+				</section>
+			</div>
+			<div class="slide" id="slide14">
+				<section>
+					<hgroup>
+						<h2 class="center">Le step</h2>
+					</hgroup>
+					<br>
+					<div class="center">
+						<img src="img/chunk-oriented-processing.png">
+					</div>
+				</section>
+			</div>
+			<div class="slide" id="slide15">
+				<section>
+					<hgroup>
+						<h2 class="center">Configuration du job</h2>
+					</hgroup>
+					<br>
+					<div>
+						<pre><code><br>&lt;job id="statification"&gt;<br>	&lt;step id="purgeDatesAnterieuresDateDuJour" next="filtreDOF"&gt;<br>		&lt;tasklet ref="purgeDateTask" /&gt;<br>		&lt;listeners&gt;<br>			&lt;listener ref="stepLoggerListener" /&gt;<br>		&lt;/listeners&gt;<br>	&lt;/step&gt;<br>	...<br>&lt;/job&gt;
+						</code></pre>
+					</div>
+				</section>
+			</div>
+			<div class="slide" id="slide15_1">
+				<section>
+					<hgroup>
+						<h2 class="center">Configuration du job</h2>
+					</hgroup>
+					<div>
+						<pre><code><br>&lt;job id="statification"&gt;<br>	...<br>	&lt;step id="filtreCritereElaboration"&gt;<br>		&lt;tasklet transaction-manager="txManager" &gt;<br>			&lt;chunk reader="criteresReader" processor="compositeProcessor" <br>				writer="DOFWriter" commit-interval="${pageSize}" /&gt;<br>			&lt;listeners&gt;<br>				&lt;listener ref="chunkLoggerListener" /&gt;<br>				&lt;listener ref="itemLoggerListener" /&gt;<br>			&lt;/listeners&gt;<br>		&lt;/tasklet&gt;<br>		&lt;listeners&gt;<br>			&lt;listener ref="stepLoggerListener" /&gt;<br>			&lt;listener ref="stepDOFListener" /&gt;<br>		&lt;/listeners&gt;<br>	&lt;/step&gt;<br>	...<br>&lt;/job&gt;</code></pre>
+					</div>
+				</section>
+			</div>
+			<div class="slide" id="slide15_2">
+				<section>
+					<hgroup>
+						<h2 class="center">Configuration du job</h2>
+					</hgroup>
+					<br>
+					<div>
+						<pre><code><br>&lt;job id="statification"&gt;<br>	...<br>	&lt;listeners&gt;<br>		&lt;listener ref="jobLoggerListener" /&gt;<br>		&lt;listener ref="authenticationListener" /&gt;<br>	&lt;/listeners&gt;<br>&lt;/job&gt;
+						</code></pre>
+					</div>
+				</section>
+			</div>
+			<div class="slide" id="slide16">
+				<section>
+					<hgroup>
+						<h2 class="center">Configuration du reader</h2>
+					</hgroup>
+					<br>
+					<div>
+						<pre><code><br>&lt;bean id="criteresReader" class="org.springframework.batch.item.database.JdbcPagingItemReader"&gt;<br>	&lt;property name="dataSource" ref="dataSource" /&gt;<br>	&lt;property name="queryProvider"&gt;<br>		&lt;bean class="org...SqlPagingQueryProviderFactoryBean"&gt;<br>			&lt;property name="dataSource" ref="dataSource" /&gt;<br>			&lt;property name="selectClause" value="select *" /&gt;<br>			&lt;property name="fromClause" value="FROM ST.CRITETB" /&gt;<br>			&lt;property name="sortKey" value="ID" /&gt;<br>		&lt;/bean&gt;<br>	&lt;/property&gt;<br>	&lt;property name="pageSize" value="${pageSize}" /&gt;<br>	&lt;property name="rowMapper"&gt;<br>		&lt;ref local="critereElaborationRowMapper"/&gt;<br>	&lt;/property&gt;<br>&lt;/bean&gt;
+						</code></pre>
+					</div>
+				</section>
+			</div>
+			<div class="slide" id="slide17">
+				<section>
+					<hgroup>
+						<h2 class="center">Configuration du composite processor</h2>
+					</hgroup>
+					<br>
+					<div>
+						<pre><code><br>&lt;bean id="compositeProcessor" class="org...CompositeItemProcessor"&gt;<br>	&lt;property name="delegates"&gt;<br>		&lt;list&gt;<br>			&lt;ref local="activeCritereProcessor" /&gt;<br>			&lt;ref local="DOFProcessor" /&gt;<br>		&lt;/list&gt;<br>	&lt;/property&gt;<br>&lt;/bean&gt;
+						</code></pre>
+					</div>
+				</section>
+			</div>
+			<div class="slide" id="source">
+				<section>
+					<hgroup>
+						<h2 class="center">Source</h2>
+					</hgroup>
+					<br>
+					<pre class="comment"><a href="http://static.springsource.org/spring-batch/reference/" target="blank">http://static.springsource.org/spring-batch/reference/</a></pre>
+					<br>
+					<pre class="comment"><a href="http://blog.octo.com/spring-batch-par-quel-bout-le-prendre/" target="blank">http://blog.octo.com/spring-batch-par-quel-bout-le-prendre/</a></pre>
+				</section>
+			</div>
+		</div>
+		<div id="hidden-note" class="invisible" style="display: none;">
+		</div>
+		<aside id="help" class="sidebar invisible" style="display: hidden;">
+			<table>
+				<caption>Help</caption>
+				<tr>
+					<th>Move forward/back</th>
+					<td>&larr;&nbsp;&rarr;</td>
+				</tr>
+				<tr>
+					<th>Move forward</th>
+					<td>spacebar</td>
+				</tr>
+				<tr>
+					<th>Hidden Notes</th>
+					<td>N</td>
+				</tr>
+				<tr>
+					<th>Help</th>
+					<td>H</td>
+				</tr>
+			</table>
+		</aside>
+	</div>
+	<script src="js/script.js"></script>
+</body>
+</html>

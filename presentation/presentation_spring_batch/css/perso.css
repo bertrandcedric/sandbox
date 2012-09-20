@@ -1,0 +1,30 @@
+.center {
+	text-align: center;
+}
+
+table {
+	border-width:1px; 
+	border-style:solid; 
+	border-color:black;
+	border-collapse:collapse;
+}
+
+td { 
+	border-width:1px;
+	border-style:solid; 
+	border-color:black;
+}
+
+pre { 
+	font-size: 0.8em; 
+	margin: 0.3em 0; 
+}
+
+body pre code {
+	background: rgba(0, 0, 0, 0.4);
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	padding-top: 0.3em;
+	padding-bottom: 0.3em;
+}
