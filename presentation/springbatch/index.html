@@ -68,6 +68,7 @@
 					</hgroup>
 					<ul>
 						<li>Spring Batch n'est pas un scheduler</li>
+						<li>On ne fait pas un traitement batch</li>
 					</ul>
 				</section>
 			</div>
@@ -79,6 +80,9 @@
 					<div class="center">
 						<img src="img/spring-batch-reference-model.png">
 					</div>
+					<ul>
+						<li>'Separation Of Concern'</li>
+					</ul>
 				</section>
 			</div>
 			<div class="slide" id="slide6">
@@ -89,6 +93,9 @@
 					<div class="center">
 						<img src="img/job-stereotypes-parameters.png">
 					</div>
+					<ul>
+						<li>Le job encapsule la totalité du processus de batch</li>
+					</ul>
 				</section>
 			</div>
 			<div class="slide" id="slide7">
@@ -277,19 +284,6 @@
 					</div>
 				</section>
 			</div>
-			<div class="slide" id="slide12">
-				<section>
-					<hgroup>
-						<h2 class="center">Execution d'un job</h2>
-					</hgroup>
-					<br>
-					<div class="center">
-						<pre><code>mvn exec:java -Dexec.mainClass=CommandLineJobRunner<br>-Dexec.args="batch.xml statification"</code></pre>
-						<br>
-						<pre><code>java CommandLineJobRunner batch.xml statification</code></pre>
-					</div>
-				</section>
-			</div>
 			<div class="slide" id="slide13">
 				<section>
 					<hgroup>
@@ -304,7 +298,7 @@
 					</div>
 					<div style="clear:both;"></div>
 					<ul>
-						<li>Un enchaînement d'étape plus ou moins complexe</li>
+						<li>Un enchaînement d'étape plus ou moins complexe et ordonné</li>
 					</ul>
 				</section>
 			</div>
@@ -320,6 +314,7 @@
 					<ul>
 						<li>Un processus 'Chunk-Oriented' par défaut</li>
 						<li>C'est là que l'on retrouve les traitements métier</li>
+						<li>Le code JAVA, c'est maintenant</li>
 					</ul>
 				</section>
 			</div>
@@ -389,6 +384,19 @@
 					<div>
 						<pre><code><br>&lt;bean id="compositeProcessor" class="org...CompositeItemProcessor"&gt;<br>	&lt;property name="delegates"&gt;<br>		&lt;list&gt;<br>			&lt;ref local="activeCritereProcessor" /&gt;<br>			&lt;ref local="DOFProcessor" /&gt;<br>		&lt;/list&gt;<br>	&lt;/property&gt;<br>&lt;/bean&gt;
 						</code></pre>
+					</div>
+				</section>
+			</div>
+			<div class="slide" id="slide12">
+				<section>
+					<hgroup>
+						<h2 class="center">Execution d'un job</h2>
+					</hgroup>
+					<br>
+					<div class="center">
+						<pre><code>mvn exec:java -Dexec.mainClass=CommandLineJobRunner<br>-Dexec.args="batch.xml statification"</code></pre>
+						<br>
+						<pre><code>java CommandLineJobRunner batch.xml statification</code></pre>
 					</div>
 				</section>
 			</div>
