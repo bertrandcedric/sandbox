@@ -387,6 +387,27 @@
 					</div>
 				</section>
 			</div>
+			<div class="slide" id="slide20_1">
+				<section>
+					<hgroup>
+						<h2 class="center">Implementation de test unitaire</h2>
+					</hgroup>
+					<br>
+					<div>
+						<pre><code>public void limitStatificationScopeForClosedDates() throws Exception {
+	GererInformationsProduitV10 mock = mock(GererInformationsProduitV10.class);
+	when(mock.gererPlagesOuvertureSejours()).thenReturn(new GererPlagesOuvertureSejoursResponse());
+	beanFactory.getBean(StepDOFListener.class).setGererInformationsProduit(mock);
+
+	JobLauncherTestUtils jobLauncherTestUtils = new JobLauncherTestUtils();
+	jobLauncherTestUtils.setJobRepository((JobRepository) beanFactory.getBean("jobRepository"));
+	jobLauncherTestUtils.setJobLauncher((JobLauncher) beanFactory.getBean("jobLauncher"));
+	jobLauncherTestUtils.setJob((Job) beanFactory.getBean("statification"));
+	jobLauncherTestUtils.launchStep("filtreCritereElaboration");
+}</code></pre>
+					</div>
+				</section>
+			</div>
 			<div class="slide" id="slide12">
 				<section>
 					<hgroup>
